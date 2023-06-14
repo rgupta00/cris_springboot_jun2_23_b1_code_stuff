@@ -8,7 +8,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 @Entity
-@Table(name = "account_table")
+@Table(name = "account_table2")
 public class Account {
 	
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,11 +27,13 @@ public class Account {
 
 	public Account() {}
 
-	public int getId() {
+
+
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
