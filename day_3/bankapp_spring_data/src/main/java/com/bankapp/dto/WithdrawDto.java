@@ -3,13 +3,13 @@ package com.bankapp.dto;
 import java.math.BigDecimal;
 
 public class WithdrawDto {
-	private Integer AccId;
+	private Integer accId;
 	private BigDecimal amount;
 	public Integer getAccId() {
-		return AccId;
+		return accId;
 	}
 	public void setAccId(Integer accId) {
-		AccId = accId;
+		this.accId = accId;
 	}
 	public BigDecimal getAmount() {
 		return amount;
@@ -19,10 +19,11 @@ public class WithdrawDto {
 	}
 	public WithdrawDto(Integer accId, BigDecimal amount) {
 		super();
-		AccId = accId;
+		this.accId = accId;
 		this.amount = amount;
 	}
 	public WithdrawDto() {}
 	
+
 	
 }

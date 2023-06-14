@@ -3,6 +3,7 @@ package com.bankapp.api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -22,14 +23,14 @@ public class AccountTransactionApi {
 	
 	
 	@Autowired
-	public AccountTransactionApi(AccountService accountService) {
+	public AccountTransactionApi( @RequestBody AccountService accountService) {
 		this.accountService = accountService;
 	}
 
 
 	//deposit
 	@PostMapping(path = "deposit")
-	public String deposit(DepositDto depositDto) {
+	public String deposit(@RequestBody DepositDto depositDto) {
 		accountService.deposit(depositDto.getAccId(), depositDto.getAmount());
 
 		return environment.getProperty("ACCOUNT.DEPOSIT.SUCCESS.MESSAGE");
@@ -37,14 +38,14 @@ public class AccountTransactionApi {
 	
 	//withdraw
 	@PostMapping(path = "withdraw")
-	public String withdraw(WithdrawDto withdrawDto) {
+	public String withdraw(@RequestBody WithdrawDto withdrawDto) {
 		accountService.withdraw(withdrawDto.getAccId(), withdrawDto.getAmount());
 		return environment.getProperty("ACCOUNT.WITHDRAW.SUCCESS.MESSAGE");
 	}
 	
 	//transfer
 	@PostMapping(path = "transfer")
-	public String transfer(TransferDto transferDto) {
+	public String transfer(@RequestBody  TransferDto transferDto) {
 		accountService.transfer(transferDto.getFromAccId(), 
 				transferDto.getToAccId(), transferDto.getAmount());
 		return environment.getProperty("ACCOUNT.TRANSFER.SUCCESS.MESSAGE");
