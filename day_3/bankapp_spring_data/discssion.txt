@@ -1,0 +1,46 @@
+
+
+What next ?
+===========
+Why not write the code togather
+
+Spring boot + spring data + join
+ 
+bank application
+
+	1. CRUD oper on account
+			add
+			delete
+			update
+			getAll
+			getById
+			
+	2. tx mgt
+		deposit
+		withdraw
+		transfer
+		
+	3. Account <>----TxHistory
+	
+	account:
+	-------
+	id
+	name
+	balance
+	phone
+	email
+	
+	TxHistory
+	---------
+	txid
+	fromAcc
+	toAcc
+	amount
+	datetime
+	authority
+
+	inhouse bank application
+	
+			mgr
+			clerk
+
