@@ -7,6 +7,8 @@ import java.util.stream.Collectors;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -29,15 +31,20 @@ public class AccountServiceImpl implements AccountService{
 		this.accountRepo = accountRepo;
 	}
 
+	@Cacheable(value = "accounts")
 	@Override
 	public List<AccountDto> getAll() {
 
-		logger.info("get all product method is called ***********************");
+		logger.info("**************************************");
+		try {
+			Thread.sleep(1000);
+		}catch(InterruptedException e) {}
 		return accountRepo.findAll().stream()
 				.map(AccountUtil::convertToAccountDto)
 				.collect(Collectors.toList());
 	}
 
+	@Cacheable(value = "accounts", key = "#id")
 	@Override
 	public AccountDto getById(int id) {
 		//Optional works as a streams
@@ -47,6 +54,7 @@ public class AccountServiceImpl implements AccountService{
 
 	}
 
+	@Cacheable(value = "accounts", key = "#result.id")
 	@Override
 	public AccountDto createAccount(AccountDto accountDto) {
 		Account accountToAdd=AccountUtil.convertToAccount(accountDto);
@@ -54,6 +62,7 @@ public class AccountServiceImpl implements AccountService{
 		return AccountUtil.convertToAccountDto(accountToAdd);
 	}
 
+	@CacheEvict(value ="accounts", key="#id" )
 	@Override
 	public AccountDto deleteAccount(int id) {
 		AccountDto accountDtoToDelete= getById(id);
@@ -100,6 +109,12 @@ public class AccountServiceImpl implements AccountService{
 		accDto.setBalance(accDto.getBalance().subtract(amount));
 		accountRepo.save(AccountUtil.convertToAccount(accDto));
 	}
+
+	//Cron job
+	
+	@CacheEvict(value ="accounts", allEntries = true )
+	@Override
+	public void removeCache() {}
 
 }
 

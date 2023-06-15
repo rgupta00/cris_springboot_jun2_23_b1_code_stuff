@@ -9,10 +9,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cache.annotation.EnableCaching;
+import org.springframework.scheduling.annotation.EnableScheduling;
 
 import com.bankapp.entites.Account;
 import com.bankapp.repo.AccountRepo;
 
+//1. schedule processing
+
+@EnableScheduling
+
+//1. enable caching
+@EnableCaching
 @SpringBootApplication
 public class BankappSpringDataApplication implements CommandLineRunner{
 

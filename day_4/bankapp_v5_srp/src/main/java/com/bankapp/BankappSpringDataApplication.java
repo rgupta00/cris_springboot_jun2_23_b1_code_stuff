@@ -13,7 +13,12 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import com.bankapp.entites.Account;
 import com.bankapp.repo.AccountRepo;
 
+import io.swagger.v3.oas.annotations.OpenAPIDefinition;
+import io.swagger.v3.oas.annotations.info.Info;
+
 @SpringBootApplication
+@OpenAPIDefinition(info =@Info(title = "Bankapp CRIS API",version   = "3.0", description = 
+"CRIS internal project") )
 public class BankappSpringDataApplication implements CommandLineRunner{
 
 	@Autowired

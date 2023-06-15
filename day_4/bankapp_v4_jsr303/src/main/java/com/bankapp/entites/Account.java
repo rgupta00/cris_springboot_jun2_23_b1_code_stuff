@@ -14,6 +14,8 @@ import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.Range;
 
+import com.bankapp.util.DataPattern;
+
 //violation of SRP
 @Entity
 @Table(name = "account_table2")
@@ -23,7 +25,7 @@ public class Account {
 	private Integer id;
 	
 	@NotEmpty(message = "{account.name.absent}")
-	@Pattern(regexp = "[A-Za-z]+( [A-Za-z]+)*", message = "{account.name.invalid}")
+	@Pattern(regexp = DataPattern.EMAIL_PATTERN, message = "{account.name.invalid}")
 	private String name;
 	
 	@NotNull(message = "{account.balance.absent}")
